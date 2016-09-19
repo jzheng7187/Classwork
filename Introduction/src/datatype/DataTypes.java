@@ -10,7 +10,7 @@ public class DataTypes {
 		//gets 2.5, but rounds down
 		System.out.println(3+5.0/2+5*2);
 		System.out.println((double) 3+5/2+5*2);
-		System.out.println();
+		System.out.println((int)(3.0+5)/(2+5/2));
 	}
 
 }
