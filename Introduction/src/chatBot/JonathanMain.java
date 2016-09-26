@@ -14,6 +14,7 @@ public class JonathanMain {
 		createTopic();
 		promptName();
 		talkForever();
+		// space, periods and numbers come before the letter "a"
 		}
 	
 	private static void promptName() {
@@ -30,7 +31,7 @@ public class JonathanMain {
 		while(inLoop){
 			print("Greetings, " + users +". How are you?");
 			response = getInput();
-			if(response.indexOf("good") >= 0){
+			if(findKeyword(response, "good", 0)){
 				print("I'm so happy you're good.");
 			}
 			else if(response.indexOf("school") >= 0){
@@ -41,6 +42,36 @@ public class JonathanMain {
 				print("I'm sorry. I don't understand you.");
 			}
 		}
+	}
+	
+	public static boolean findKeyword(String searchString, String key, int startIndex){
+		//delete white space
+		String phrase = searchString.trim(); // trim() is in the api
+		//set all letters to lowercase
+		phrase = phrase.toLowerCase();
+		key = key.toLowerCase();
+		//find position of key
+		int psn = phrase.indexOf(key);
+		//keep looking for word
+		//until you find the right context
+		while(psn >= 0){
+			String after = "";
+			String before = "";
+			if(psn + key.length() < phrase.length()){
+				after = phrase.substring(psn + key.length(), psn + key.length()+1).toLowerCase();
+			}
+			//if the phrase does not begin with this word
+			if (psn> 0){
+				before = phrase.substring(psn -1, psn).toLowerCase();
+			}
+			if(before.compareTo("a") < 0 && after.compareTo("a") < 0){
+				return true;
+			}
+			//in case the keyword was not found yet
+			//check the rest of the string
+			psn = phrase.indexOf(key,psn + 1);
+		}
+		return false;
 	}
 	public static void promptInput() {
 		print(users+", try inputting a string!");
