@@ -8,6 +8,7 @@ public class JonathanMain {
 	static boolean inLoop;
 	static String response;
 	static Topic school;
+	static Topic like;
 	
 	public static void main(String[] args) {
 		createTopic();
@@ -33,6 +34,10 @@ public class JonathanMain {
 			if(findKeyword(response, "good", 0) >= 0){
 				print("I'm so happy you're good.");
 			}
+			else if(findKeyword(response, "like", 0) >= 0){
+				inLoop = false;
+				like.talk();
+			}
 			else if(response.indexOf("school") >= 0){
 				inLoop = false; //exits the loop
 				school.talk();
@@ -50,12 +55,12 @@ public class JonathanMain {
 		phrase = phrase.toLowerCase();
 		key = key.toLowerCase();
 		
-		System.out.println("The phrase is " + phrase+ ".");
-		System.out.println("The key is "+ key + ".");
+//		System.out.println("The phrase is " + phrase+ ".");
+//		System.out.println("The key is "+ key + ".");
 		
 		//find position of key
 		int psn = phrase.indexOf(key);
-		System.out.println("The position found is " + psn + ".");
+//		System.out.println("The position found is " + psn + ".");
 		//keep looking for word
 		//until you find the right context
 		while(psn >= 0){
@@ -63,15 +68,15 @@ public class JonathanMain {
 			String before = "";
 			if(psn + key.length() < phrase.length()){
 				after = phrase.substring(psn + key.length(), psn + key.length()+1).toLowerCase();
-				System.out.println("The character after " + key + " is " + after);
+//				System.out.println("The character after " + key + " is " + after);
 			}
 			//if the phrase does not begin with this word
 			if (psn> 0){
 				before = phrase.substring(psn -1, psn).toLowerCase();
-				System.out.println("The charcter before " + key + " is" + before);
+//				System.out.println("The charcter before " + key + " is" + before);
 			}
 			if(before.compareTo("a") < 0 && after.compareTo("a") < 0){
-				System.out.println(key + " was found at" + psn);
+//				System.out.println(key + " was found at " + psn);
 				if(noNegations(phrase, psn)){
 					return psn;
 				}
@@ -79,7 +84,7 @@ public class JonathanMain {
 			//in case the keyword was not found yet
 			//check the rest of the string
 			psn = phrase.indexOf(key,psn + 1);
-			System.out.println( key + " was not found. " + "Checking " + psn);
+//			System.out.println( key + " was not found. " + "Checking " + psn);
 		}
 		return -1;
 	}
@@ -144,6 +149,7 @@ public class JonathanMain {
 	public static void createTopic() {
 		input = new Scanner(System.in);
 		school = new School();
+		like = new JonathanLike();
 		
 	}
 	
