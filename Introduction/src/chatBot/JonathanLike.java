@@ -30,4 +30,13 @@ public class JonathanLike implements Topic {
 		 
 	}
 
+
+	@Override
+	public boolean isTriggered(String userInput) {
+		if(JonathanMain.findKeyword(userInput, "like", 0) >= 0){
+			return true;
+		}
+		return false;
+	}
+
 }

@@ -20,4 +20,15 @@ public class School implements Topic {
 		
 	}
 
+	public boolean isTriggered(String userInput) {
+		String[] triggers = {"school", "class", "teacher"};
+		if(JonathanMain.findKeyword(userInput, "school", 0) >= 0){
+			return true;
+		}
+		if(JonathanMain.findKeyword(userInput, "class", 0) >= 0){
+			return true;
+		}
+		return false;
+	}
+
 }
