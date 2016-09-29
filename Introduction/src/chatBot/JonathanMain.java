@@ -9,6 +9,7 @@ public class JonathanMain {
 	static String response;
 	static Topic school;
 	static Topic like;
+	static Topic hello;
 	
 	public static void main(String[] args) {
 		createTopic();
@@ -41,6 +42,10 @@ public class JonathanMain {
 			else if(school.isTriggered(response)){
 				inLoop = false; //exits the loop
 				school.talk();
+			}
+			else if(hello.isTriggered(response)){
+				inLoop = false;
+				hello.talk();
 			}
 			else{
 				print("I'm sorry. I don't understand you.");
@@ -150,6 +155,7 @@ public class JonathanMain {
 		input = new Scanner(System.in);
 		school = new School();
 		like = new JonathanLike();
+		hello = new JonathanHello();
 		
 	}
 	
