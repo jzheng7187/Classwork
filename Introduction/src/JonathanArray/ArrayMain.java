@@ -2,15 +2,39 @@ package JonathanArray;
 //arrays are not objects
 //doesn't have any methods
 //String had a indexOf() method
+//all the same type
 public class ArrayMain {
 	
 	public static void main(String[] args) {
 		//This is how you time how quickly a computer processes
 		long startTime = System.currentTimeMillis();
-		arrayIntroMethod();
+		String[] someStrings = new String[100];
+		populateArray(someStrings);
+		
+		changeString(someStrings[99]);
+		
+		printArray(someStrings);
+		//arrayIntroMethod();
 		long endTime = System.currentTimeMillis();
 		System.out.println("Completed method in " + (endTime - startTime) + " milliseconds");
 		
+	}
+
+	private static void changeString(String s) {
+		s = "This String has been changed"; 
+		
+	}
+
+	private static void printArray(String[] a) {
+		for(String s: a){
+			System.out.println(s);
+		}
+	}
+
+	private static void populateArray(String[] a) {
+		for(int index = 0; index < a.length; index++){
+			a[index] = "value " + (index + 1);
+		}
 	}
 
 	public static void arrayIntroMethod(){
@@ -34,17 +58,19 @@ public class ArrayMain {
 				//SECOND METHOD: "FOR-EACH"
 				//always goes in order, does not keep track of index
 				//easier to type
-				int index = 0;
 				for(boolean b:booleans){
-					System.out.println(index + ") " + b);
-					index++;
+					System.out.println("" + b);
 				}
 				
 				//these two constructors are different
 				String[] strings1 = {"","",""};
 				String[] strings2 = new String[3];
-				for(String s: strings1){
-					System.out.println(s);
+//				strings2[0] = "value 1";
+//				strings2[1] = "value 2";
+//				strings2[2] = "value 3";
+				
+				for(int index = 0; index < strings2.length; index++){
+					strings2[index] = "value " + (index + 1);
 				}
 				for(String s: strings2){
 					System.out.println(s);
