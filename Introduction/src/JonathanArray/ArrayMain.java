@@ -8,16 +8,49 @@ public class ArrayMain {
 	public static void main(String[] args) {
 		//This is how you time how quickly a computer processes
 		long startTime = System.currentTimeMillis();
-		String[] someStrings = new String[100];
-		populateArray(someStrings);
-		
-		changeString(someStrings[99]);
-		
-		printArray(someStrings);
-		//arrayIntroMethod();
+
+		SampleElement sample = new SampleElement(10);
+		sample.increase();
+		System.out.println("The sample element has "
+				+ "a number value equal to " + sample.getNumber());
 		long endTime = System.currentTimeMillis();
 		System.out.println("Completed method in " + (endTime - startTime) + " milliseconds");
 		
+	}
+
+	private static void passByValueDemonstration(){
+		String[] someStrings = new String[100];
+		populateArray(someStrings);
+		
+		int ten = 10;
+		increase(ten);
+		System.out.println("Ten increased is " + ten);
+		System.out.println("Before: " + someStrings[99]);
+		changeString(someStrings[99]);
+		System.out.println("After \"changeString\" method: " + someStrings[99]);
+		changeArray(someStrings);
+		System.out.println("After \"changeArray\" method: " + someStrings[99]);
+		changeArrayElement(someStrings, 99);
+		System.out.println("After \"changeArrayElement\" method: " + someStrings[99]);
+		printArray(someStrings);
+		//arrayIntroMethod();
+	}
+	
+	//this method does nothing, since local variable dies at the end of the method 
+	private static void increase(int ten) {
+		ten = ten + 1;
+		
+	}
+
+	private static void changeArrayElement(String[] someStrings, int i) {
+		someStrings[i] = "new item" + (i +1);
+	}
+
+	private static void changeArray(String[] someStrings) {
+		someStrings = new String[100];
+		for(int index = 0; index < someStrings.length; index++){
+			someStrings[index] = "new item " + (index + 1); 
+		}
 	}
 
 	private static void changeString(String s) {

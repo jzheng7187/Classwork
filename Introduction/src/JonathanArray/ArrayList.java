@@ -11,7 +11,7 @@ public class ArrayList {
 		int index = 0;
 		for(int b:randoms){
 			index ++;
-			b = (int) ((Math.random() * 50) + 3);
+			b = (int) ((Math.random() * 50) + 1);
 			System.out.println(index + ") "+ b); 
 		}
 	}
