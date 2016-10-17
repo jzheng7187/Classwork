@@ -6,6 +6,7 @@ public class ArrayList {
 		arrayIntoMethodRandom();
 		arrayIntoMethod();
 		rollDice();
+		deckOfCards();
 	}
 
 	private static void arrayIntoMethod() {
@@ -35,9 +36,10 @@ public class ArrayList {
 	}
 	
 	public static void deckOfCards(){
+		String[] suite = {"Spades", "Clubs", "Hearts", "Diamonds"};
+		String[] royal = {"Ace","Jack", "Queen", "King"};
 		int [] cards = new int [52];
 		for(int index = 0; index < cards.length; index++){
-			
 		}
 	}
 }
