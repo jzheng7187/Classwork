@@ -40,6 +40,22 @@ public class ArrayMethods {
 		
 	}
 
+	public static void selectionSort(int[] array){
+		System.out.println("Selection sort with "+arrays.toString(array));
+		for (int i = 0; i < array.length - 1; i++){
+		    int tempLowIndex = i;
+		    for (int j = i + 1; j < array.length; j++){
+		        if (array[j] < array[tempLowIndex]){
+		            tempLowIndex = j;
+		        }
+		    }
+		   if(tempLowIndex!=i){
+		         swap(array, tempLowIndex, i);
+		         System.out.println("becomes "+arrays.toString(array));
+		   } 
+		   }//end for
+		System.out.println("Ends as "+arrays.toString(array));
+	}
 	private static void print(int[] arr){
 		for(int i = 0; i < arr.length; i++){
 			System.out.println(arr[i]+", ");
