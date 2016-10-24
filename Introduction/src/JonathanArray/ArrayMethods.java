@@ -17,6 +17,21 @@ public class ArrayMethods {
 //		}
 	}
 
+	public static void cycleThrough(int[] arr, int n){
+		for(int i = 0; i < arr.length; i++){
+			cycleOnce(arr);
+		}
+	}
+	
+	private static void cycleOnce(int[] arr) {
+		for(int i = 0; i < arr.length; i++){
+			if(i == 0){
+				swap(arr,arr[i], arr[arr.length]);
+			}
+			swap(arr, arr[i], arr[i + 1]);
+		}
+	}
+
 	private static void shuffle(int[] arr) {
 		for(int i = 0; i < arr.length; i++){
 			int random = (int) (Math.random() * arr.length);
