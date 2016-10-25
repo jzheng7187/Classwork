@@ -19,7 +19,7 @@ public class ArrayMethods {
 //		}
 		countUnderBound(arr, 4);
 		int[] array = {3, 9, 6, 11, 14, 16, 3, 6, 7, 10, 14, 25, 31, 13, 24, 3, 6, 9 ,11, 3, 9, 6 , 11};
-		int[] subArr = getSubArray(array, 2, 4);
+		int[] subArr = getSubArray(array, 19, 22);
 		System.out.println(Arrays.toString(subArr) + "");
 		contains(array, subArr);
 	}
@@ -51,9 +51,11 @@ public class ArrayMethods {
 				//for(int index = 0; index < subArray.length; index++){
 				int index = i;
 				while(index < subArray.length){
-					if(subArray[index] == arr[index + 1]){
+					if(subArray[index] == arr[index + i] && index == subArray.length - 1){
+						System.out.println("Found a match at index " + i);
 						return true;
 					}else if(subArray[index] != arr[i+ index]){
+						System.out.println("No match at " + i);
 						break;
 					}
 					index++;
