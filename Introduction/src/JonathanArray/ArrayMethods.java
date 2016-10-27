@@ -17,11 +17,13 @@ public class ArrayMethods {
 //					+ "greater than or equal to the value in the middle of "
 //					+ "the array.");
 //		}
-		countUnderBound(arr, 4);
-		int[] array = {3, 9, 6, 11, 14, 16, 3, 6, 7, 10, 14, 25, 31, 13, 24, 3, 6, 9 ,11, 3, 9, 6 , 11};
-		int[] subArr = getSubArray(array, 19, 22);
-		System.out.println(Arrays.toString(subArr) + "");
-		contains(array, subArr);
+//		countUnderBound(arr, 4);
+//		int[] array = {3, 9, 6, 11, 14, 16, 3, 6, 7, 10, 14, 25, 31, 13, 24, 3, 6, 9 ,11, 3, 9, 6 , 11};
+//		int[] subArr = getSubArray(array, 19, 22);
+//		System.out.println(Arrays.toString(subArr) + "");
+//		contains(array, subArr);
+		int[] array = new int[50];
+		testPrimes(50);
 	}
 
 	/**
@@ -65,6 +67,43 @@ public class ArrayMethods {
 		return false;
 	}
 		
+	
+	private static void testPrimes(int numberToTest){
+		int lastToCheck = (int)(Math.sqrt(numberToTest));
+		boolean[] theNumbers = new boolean[numberToTest];
+		for(int i = 0; i < numberToTest; i++){
+			theNumbers[i] = true;
+		}
+		theNumbers[0] = false;
+		theNumbers[1] = false;
+		int increment = 2;
+		boolean first = true;
+		for(int test = 2; test < numberToTest; test = test + increment){
+			if(!first){
+				theNumbers[test] = false;
+			}else{
+				first = false;
+			}
+		}
+		for(int index = 0; index < theNumbers.length; index++){
+			if(theNumbers[index]){
+				System.out.println(index + " is prime.");
+			}
+		}
+	}
+	
+	public static int[] populateRandomArray(int[] arr){
+		int[] randArr = new int[arr.length - 1];
+		int randoms = 0;
+		for(int i = 0; i < arr.length; i ++){
+			randoms = (int)(Math.random() * arr.length-1);
+			randArr[i] = arr[randoms];
+			if(randArr[i] == randoms){
+				
+			}
+		}
+		return arr;
+	}
 	
 	//returns number of elements in arr less than d
 	public static int countUnderBound(double[] arr, double d){
