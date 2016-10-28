@@ -70,39 +70,64 @@ public class ArrayMethods {
 	
 	private static void testPrimes(int numberToTest){
 		int lastToCheck = (int)(Math.sqrt(numberToTest));
-		boolean[] theNumbers = new boolean[numberToTest];
-		for(int i = 0; i < numberToTest; i++){
-			theNumbers[i] = true;
-		}
-		theNumbers[0] = false;
-		theNumbers[1] = false;
-		int increment = 2;
-		boolean first = true;
-		for(int test = 2; test < numberToTest; test = test + increment){
-			if(!first){
-				theNumbers[test] = false;
-			}else{
-				first = false;
+		//boolean[] theNumbers = new boolean[numberToTest];
+//		for(int i = 0; i < numberToTest; i++){
+//			theNumbers[i] = true;
+//		}
+//		theNumbers[0] = false;
+//		theNumbers[1] = false;
+//		int increment = 2;
+//		boolean first = true;
+//		for(int test = 2; test < numberToTest/2; test =test + increment){
+//			if(!first){
+//				theNumbers[test] = false;
+//			}
+//			else{
+//				first = false;
+//			}
+//			if(numberToTest % (test + 1) == 0 || numberToTest % (test + 3) == 0 ){
+//				theNumbers[test] = false;
+//			}
+//		}
+		String primes = "";
+		for(int index = 0; index <= numberToTest; index ++){
+			int theNumbers = 0;
+			for(int j = index; j >= 1; j--){
+				if(index % j == 0){
+					theNumbers = theNumbers + 1;
+				}
+			}
+			if(theNumbers == 2){
+				primes = primes + index + " ";
 			}
 		}
-		for(int index = 0; index < theNumbers.length; index++){
-			if(theNumbers[index]){
-				System.out.println(index + " is prime.");
+		System.out.println(primes + "is prime.");
+//		for(int index = 0; index < theNumbers.length; index++){
+//			if(theNumbers[index]){
+//				System.out.println(index + " is prime.");
+//			}
+//		}
+	}
+	
+	public static void populateRandomArray(int[] arr){
+		int[] randArr = new int[arr.length - 1];
+		for(int i = 0; i < arr.length; i ++){
+			int toAdd = arr[(int)Math.random() * arr.length];
+			while(indexOf(randArr,toAdd) > -1){
+				toAdd = arr[(int)Math.random() * arr.length];
 			}
+			randArr[i] = toAdd;
 		}
 	}
 	
-	public static int[] populateRandomArray(int[] arr){
-		int[] randArr = new int[arr.length - 1];
-		int randoms = 0;
-		for(int i = 0; i < arr.length; i ++){
-			randoms = (int)(Math.random() * arr.length-1);
-			randArr[i] = arr[randoms];
-			if(randArr[i] == randoms){
-				
+	private static int indexOf(int[] arr, int toFind){
+		for(int i = 0; i < arr.length; i++){
+			if(arr[i] == toFind){
+				return i;
 			}
+			return -1;
 		}
-		return arr;
+		return 0;
 	}
 	
 	//returns number of elements in arr less than d
