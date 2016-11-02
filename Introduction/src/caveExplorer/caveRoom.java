@@ -5,14 +5,13 @@ public class caveRoom {
 	//"final" never changes
 	//constants are public and ALL-CAPS
 	//example Math.PI;
-	public class CaveRoom {
 
 		private String description;
 		private String directions;
 		private String contents;
 		private String defaultContents;
 
-		private CaveRoom[] borderingRooms;
+		private caveRoom[] borderingRooms;
 		private Door[] doors; 
 
 		public static final int NORTH = 0;
@@ -21,12 +20,12 @@ public class caveRoom {
 		public static final int WEST = 3;
 
 
-		public CaveRoom(String description){
+		public caveRoom(String description){
 			this.description = description;
 			setDefaultContents("   ");
 			contents = defaultContents;
 			
-			borderingRooms = new CaveRoom[4];
+			borderingRooms = new caveRoom[4];
 			doors = new Door[4];
 			for(int i = 0 ; i < borderingRooms.length; i++){
 				borderingRooms[i] = null;
@@ -69,7 +68,7 @@ public class caveRoom {
 		}
 		
 
-		public void addRoom(int direction, CaveRoom anotherRoom, Door door){
+		public void addRoom(int direction, caveRoom anotherRoom, Door door){
 			borderingRooms[direction] = anotherRoom;
 			doors[direction] = door;
 			setDirections();
@@ -82,7 +81,7 @@ public class caveRoom {
 		 * @param anotherRoom
 		 * @param door
 		 */
-		public void setConnection(int direction, CaveRoom anotherRoom, Door door){
+		public void setConnection(int direction, caveRoom anotherRoom, Door door){
 			addRoom(direction, anotherRoom, door);
 			anotherRoom.addRoom(oppositeDirection(direction), this, door);
 		}
@@ -113,5 +112,10 @@ public class caveRoom {
 			description = string;
 		}
 
+		public void interpretInput(String input) {
+			// TODO Auto-generated method stub
+			
+		}
+
 	}
-}
+
