@@ -33,7 +33,9 @@ public class TwoDArrayIntro {
 			//loop through col left to col right
 			for(int col = c - 1; col < c + 1; col++){
 				if(row != r && col!= c){
-					
+					if(row >= 0 && row < mines.length && col >= 0 && col < mines[row].length){
+						
+					}
 				}
 			}
 		}
