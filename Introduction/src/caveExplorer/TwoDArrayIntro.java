@@ -1,15 +1,103 @@
 package caveExplorer;
 
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class TwoDArrayIntro {
 
+	public static String[][] arr2D;
+	public static String[][] pic;
+	public static int i;
+	public static int j;
+	public static Scanner in;
+	
 	public static void main(String[] args) {
+		arr2D = new String[5][4];
+		pic = new String[5][4];
+		//iterate row by row
+		for(int row = 0; row < arr2D.length; row++){
+			//in each row, go column by column
+			for(int col = 0; col < arr2D[row].length; col++){
+				arr2D[row][col] = "("+row+ "," + col + ")";
+			}
+		}
+		//start positions
+		i =2;
+		j= 3;
+		in = new Scanner(System.in);
+		startExploring();
+	}
+	
+	
+	private static void startExploring() {
+		while(true){
+			printPic(pic);
+			System.out.println("You are in room " + arr2D[i][j]);
+			System.out.println("What do you want to do?");
+			String input = in.nextLine();
+			while(!isValid(input)){
+				System.out.println("Please enter w, a, s, or d.");
+				input = in.nextLine();
+			}
+			interpretInput(input.toLowerCase());
+		}
+		
+	}
+
+
+	private static void interpretInput(String input) {
+		int iOrig = i;
+		int jOrig = j;
+		
+		if(input.equals("w") && i > 0){
+			i--;
+		}else if(input.equals("a") && j > 0){
+			j--;
+		}else if(input.equals("s") && i + 1 < arr2D.length){
+			i++;
+		}else if(input.equals("d") && j + 1 < arr2D[0].length){
+			j++;
+		}
+		
+		if(iOrig == i && jOrig == j){
+			System.out.println("You are at the edge of the universe. You can move no farther in that direction.");
+		}
+		
+	}
+
+
+	private static boolean isValid(String input) {
+		String lc = input.toLowerCase();
+		String[] keys = {"w","a","s","d"};
+		for(String key: keys){
+			if(key.equals(lc)){
+				return true;
+			}
+		}
+		return false;
+	}
+
+
+	public void createMap(){
+		createMap(10, 10);
+	}
+	public void mines(){
 		boolean[][] mines = new boolean[6][6];
 		createMines(mines, 10);
 		String[][] field = new String[mines.length][mines[0].length];
 		matchValue(field, mines);
 		printPic(field);
+	}
+	
+	private static void createMap(int r, int c){
+		boolean [][] map = new boolean [r][c];
+		for(int row = 1; row < map.length; row++){
+			map[r][0] = "|";
+			map[r][map[0].length - 1] = "|";
+		}
+		for(int col = 0; col < map[0].length; col ++){
+			
+		}
 	}
 	
 	private static void matchValue(String[][] field, boolean[][] mines) {
@@ -25,28 +113,62 @@ public class TwoDArrayIntro {
 	}
 
 	private static String countAdjacent(boolean[][] mines, int r, int c) {
+		//Second method is slower than the first. Second one checks every single box. 
+		//First method checks the the 9 boxes adjacent to it, including itself.
 		//r and c represent coordinates of element
 		//we are providing a String for
 		int count = 0;
 		//loop through row above to row below
-		for(int row = r-1; row <= r + 1; row++){
-			//loop through col left to col right
-			for(int col = c - 1; col < c + 1; col++){
-				if(row != r && col!= c){
-					if(row >= 0 && row < mines.length && col >= 0 && col < mines[row].length){
-						
-					}
-				}
-			}
+//		for(int row = r-1; row <= r + 1; row++){
+//			//loop through col left to col right
+//			for(int col = c - 1; col < c + 1; col++){
+//				if(row != r && col!= c){
+//					if(row >= 0 && row < mines.length && col >= 0 && col < mines[row].length){
+//						
+//					}
+//				}
+//			}
+//		}
+		// this method only checks elements in the [][]
+		//so it is not necessary to verify that they are valid
+		//SECOND METHOD
+//		for(int row = 0; row < mines.length; row++){
+//			for(int col = 0; col < mines[row].length; col++){
+//				if(Math.abs(row -r) + Math.abs(col - c) == 1 && mines[row][col]){
+//					//checks if true
+//					count++;
+//				}
+//			}
+//		}
+		
+		//THIRD METHOD
+		//this method is helpful when you want to be specific
+		//above
+		count += validAndTrue(mines, r-1, c);
+		//below
+		count += validAndTrue(mines, r+1, c);
+		//right
+		count += validAndTrue(mines, r, c+1);
+		//left
+		count += validAndTrue(mines, r, c-1);
+		return count + "";
+	}
+
+	private static int validAndTrue(boolean[][] mines, int i, int j) {
+		//checks valid
+		//logic in java is sequential
+		if(i >= 0 && i < mines.length && j>=0 && j < mines[i].length && mines[i][j]){
+			//checks if true(AFTER checking validity)
+			return 1;
 		}
-		return null;
+		return 0;
 	}
 
 	private static void createMines(boolean[][] mines, int numberOfMines) {
 		while(numberOfMines > 0){
 			int row = (int)(Math.random() * mines.length);
 			int col = (int)(Math.random() * mines[0].length);
-			if(mines[row][col]){
+			if(!mines[row][col]){
 				mines[row][col] = true;
 				numberOfMines--;
 			}
@@ -138,7 +260,7 @@ public class TwoDArrayIntro {
 			for(int col = 0; col < pic[row].length; col++){
 				System.out.print((pic[row][col]));
 			}
-			System.out.println();
+			System.out.println(" ");
 		}
 	}
 	
