@@ -16,7 +16,7 @@ public class TwoDArrayIntro {
 		pic = new String[5][4];
 		//iterate row by row
 		for(int row = 0; row < arr2D.length; row++){
-			//in each row, go column by column
+		//in each row, go column by column
 			for(int col = 0; col < arr2D[row].length; col++){
 				arr2D[row][col] = "("+row+ "," + col + ")";
 			}
@@ -25,7 +25,9 @@ public class TwoDArrayIntro {
 		i =2;
 		j= 3;
 		in = new Scanner(System.in);
+		print(5, 5, 0, 0);
 		startExploring();
+		//createMap(5, 5);
 	}
 	
 	
@@ -78,7 +80,7 @@ public class TwoDArrayIntro {
 	}
 
 
-	public void createMap(){
+	public void createsMap(){
 		createMap(10, 10);
 	}
 	public void mines(){
@@ -90,13 +92,42 @@ public class TwoDArrayIntro {
 	}
 	
 	private static void createMap(int r, int c){
-		boolean [][] map = new boolean [r][c];
-		for(int row = 1; row < map.length; row++){
-			map[r][0] = "|";
-			map[r][map[0].length - 1] = "|";
+		String [][] map = new String [r * 3][c];
+		for (int row = 0; row < map.length; row++){
+			for (int col = 0; col < map[row].length; col++){
+				map[row][col] = " " +"___";
+				
+			}
 		}
-		for(int col = 0; col < map[0].length; col ++){
-			
+		for (int row = 1; row < map.length; row++){
+			for (int col = 0; col < map[0].length;col++){
+			map[row][col] = "|___";
+			map[row][map[row].length-1] = "|___|";
+			}
+		}
+		printPic(map);
+	}
+	public static void print(int roomsX, int roomsY, int posX, int posY) {
+		for (int j = 0; j != roomsX; j++) {
+			System.out.print("____");
+		}
+		System.out.println();
+		
+		for (int i = 0; i != roomsY; i++) {
+			for (int j = 3; j > 0; j--) {
+				for (int k = 0; k != roomsX; k++) {
+					if (j == 1) {
+						System.out.print("|___");
+					} else {
+						if (j == 2 && i == posX && k == posY) {
+							System.out.print("| X ");
+						} else {
+							System.out.print("|   ");
+						}
+					}
+				}
+				System.out.println("|");
+			}
 		}
 	}
 	
