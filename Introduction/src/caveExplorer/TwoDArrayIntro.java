@@ -120,7 +120,7 @@ public class TwoDArrayIntro {
 						System.out.print("|___");
 					} else {
 						if (j == 2 && i == posX && k == posY) {
-							System.out.print("| X ");
+							System.out.print("|   ");
 						} else {
 							System.out.print("|   ");
 						}
