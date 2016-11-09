@@ -1,6 +1,6 @@
 package caveExplorer;
 
-public class caveRoom {
+public class CaveRoom {
 
 	//"final" never changes
 	//constants are public and ALL-CAPS
@@ -11,7 +11,7 @@ public class caveRoom {
 		private String contents;
 		private String defaultContents;
 
-		private caveRoom[] borderingRooms;
+		private CaveRoom[] borderingRooms;
 		private Door[] doors; 
 
 		public static final int NORTH = 0;
@@ -20,12 +20,12 @@ public class caveRoom {
 		public static final int WEST = 3;
 
 
-		public caveRoom(String description){
+		public CaveRoom(String description){
 			this.description = description;
-			setDefaultContents("   ");
+			setDefaultContents(" ");
 			contents = defaultContents;
 			
-			borderingRooms = new caveRoom[4];
+			borderingRooms = new CaveRoom[4];
 			doors = new Door[4];
 			for(int i = 0 ; i < borderingRooms.length; i++){
 				borderingRooms[i] = null;
@@ -51,12 +51,17 @@ public class caveRoom {
 		
 		}
 
+		public static String toDirection(int dir) {
+			String[] directions = {"The North", "The East", "The South", "The West"};
+			return directions[dir];
+		}
+
 		public String getContents(){
 			return contents;
 		}
 		
 		public void enter(){
-			contents = " X ";
+			contents = "X";
 		}
 		
 		public void leave(){
@@ -68,7 +73,7 @@ public class caveRoom {
 		}
 		
 
-		public void addRoom(int direction, caveRoom anotherRoom, Door door){
+		public void addRoom(int direction, CaveRoom anotherRoom, Door door){
 			borderingRooms[direction] = anotherRoom;
 			doors[direction] = door;
 			setDirections();
@@ -81,7 +86,7 @@ public class caveRoom {
 		 * @param anotherRoom
 		 * @param door
 		 */
-		public void setConnection(int direction, caveRoom anotherRoom, Door door){
+		public void setConnection(int direction, CaveRoom anotherRoom, Door door){
 			addRoom(direction, anotherRoom, door);
 			anotherRoom.addRoom(oppositeDirection(direction), this, door);
 		}
@@ -112,9 +117,36 @@ public class caveRoom {
 			description = string;
 		}
 
+		private static boolean isValid(String input) {
+			String lc = input.toLowerCase();
+			String[] keys = {"w","a","s","d"};
+			for(String key: keys){
+				if(key.equals(lc)){
+					return true;
+				}
+			}
+			return false;
+		}
+		
 		public void interpretInput(String input) {
-			// TODO Auto-generated method stub
-			
+			while(!isValid(input)){
+				System.out.println("You can only enter 'w', 'a', 's', 'd'.");
+				input = CaveExplorer.in.nextLine();
+			}
+			String[] keys = {"w","d","s","a"};
+			int indexFound = -1;
+			for(int i = 0; i < keys.length; i++){
+				if(input.equals(keys[i])){
+					indexFound = i;
+					break;
+				}
+			}
+			if(borderingRooms[indexFound] != null && doors[indexFound].isOpen()){
+				CaveExplorer.currentRoom.leave();
+				CaveExplorer.currentRoom = borderingRooms[indexFound];
+				CaveExplorer.currentRoom.enter();
+				CaveExplorer.inventory.updateMap();
+			}
 		}
 
 	}
