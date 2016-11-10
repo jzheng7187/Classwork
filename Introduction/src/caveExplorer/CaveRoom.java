@@ -14,6 +14,7 @@ public class CaveRoom {
 		private CaveRoom[] borderingRooms;
 		private Door[] doors; 
 
+		//always these numbers
 		public static final int NORTH = 0;
 		public static final int EAST = 1;
 		public static final int SOUTH = 2;
@@ -128,6 +129,16 @@ public class CaveRoom {
 			return false;
 		}
 		
+		
+		public void goToRoom(int direction){
+			if(borderingRooms[direction] != null && doors[direction].isOpen()){
+				CaveExplorer.currentRoom.leave();
+				CaveExplorer.currentRoom = borderingRooms[direction];
+				CaveExplorer.currentRoom.enter();
+				CaveExplorer.inventory.updateMap();
+			}
+		}
+		
 		public void interpretInput(String input) {
 			while(!isValid(input)){
 				System.out.println("You can only enter 'w', 'a', 's', 'd'.");
@@ -141,12 +152,7 @@ public class CaveRoom {
 					break;
 				}
 			}
-			if(borderingRooms[indexFound] != null && doors[indexFound].isOpen()){
-				CaveExplorer.currentRoom.leave();
-				CaveExplorer.currentRoom = borderingRooms[indexFound];
-				CaveExplorer.currentRoom.enter();
-				CaveExplorer.inventory.updateMap();
-			}
+			goToRoom(indexFound);
 		}
 
 	}

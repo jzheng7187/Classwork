@@ -6,13 +6,13 @@ public class Inventory {
 	private String map;
 	
 	public Inventory(){
-		hasMap = true;
+		hasMap = false;
 		updateMap();
 	}
 	
 	public void updateMap() {
 		map = " ";
-		for(int i = 0; i < CaveExplorer.caves[0].length;i++){
+		for(int i = 0; i < CaveExplorer.caves[0].length + 1;i++){
 			map += "___";//4 underscores
 		}
 		map += "___\n";//3 underscores
@@ -22,9 +22,12 @@ public class Inventory {
 				//a line of text for each
 				String text = "";
 				for(CaveRoom cr: row){
-					 text += "|";
+					//This Line needs to be in the else
+					//text += "|";
 					if(cr.getDoor(CaveRoom.WEST) != null && cr.getDoor(CaveRoom.WEST).isOpen()){
-						text += "  ";
+						text += " ";
+					}else{
+						text+= "|";
 					}
 					if(i == 0){
 						text += "   ";//3 spaces 
