@@ -25,6 +25,8 @@ public class Screen {
 		Graphics2D g = image.createGraphics();
 		g.setColor(Color.cyan);
 		g.fillRect(0, 0, image.getWidth(), image.getHeight());
+		g.setColor(Color.black);
+		g.drawString("Hello World", 40, 100);
 	}
 
 }
