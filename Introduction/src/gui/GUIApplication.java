@@ -44,7 +44,7 @@ public abstract class GUIApplication extends JFrame{
 // 	- has methods(only useful to subclasses that inherit this class)
 //	- mix between an interface and a class 
 //	- only extends one class
-//	- cannot be instantiated
+//	- cannot be instantiated                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
 
 
 //declaration: int[] num;
