@@ -6,7 +6,7 @@ import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 
-public class Button extends TextLabel {
+public class Button extends TextLabel implements Clickable{
 
 	private Color color;
 	private Action action;
@@ -47,6 +47,16 @@ public class Button extends TextLabel {
 			g.drawString(t, (getWidth()-fm.stringWidth(t))/2, (getHeight()+fm.getHeight()-fm.getDescent())/2);
 //			g.drawString(getText(), 4, (getHeight()-5));
 		}	
+	}
+
+	@Override
+	public boolean isHovered(int x, int y) {
+		return x>getX() && x<getX()+getWidth() && y > getY() && y<getY()+getHeight();
+	}
+
+	@Override
+	public void act() {
+		action.act();
 	}	
 	
 }
