@@ -2,6 +2,7 @@ package gui.screens;
 
 import java.awt.Color;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
@@ -12,8 +13,9 @@ import gui.components.Graphic;
 import gui.components.TextArea;
 import gui.components.TextLabel;
 import gui.components.Visible;
+import gui.sampleGames.MouseCoordinateGame;
 
-public class CoordinateScreen extends Screen implements MouseMotionListener{
+public class CoordinateScreen extends Screen implements MouseMotionListener, MouseListener{
 
 	private Button button;
 	private TextLabel text;
@@ -30,7 +32,7 @@ public class CoordinateScreen extends Screen implements MouseMotionListener{
 			
 			@Override
 			public void act() {
-				
+				MouseCoordinateGame.game.setScreen(MouseCoordinateGame.myScreen);
 			}
 		});
 		viewObjects.add(button);
@@ -40,8 +42,8 @@ public class CoordinateScreen extends Screen implements MouseMotionListener{
 				+ " we worked on this in class. This is called Text Area.");
 		viewObjects.add(area);
 		
-		luminous  = new Graphic(500, 30, 100, 100, "resources/sampleImages/Luminous.png");
-		viewObjects.add(luminous);
+//		luminous  = new Graphic(500, 30, 100, 100, "resources/sampleImages/Luminous.png");
+//		viewObjects.add(luminous);
 	}
 
 	@Override
@@ -58,6 +60,42 @@ public class CoordinateScreen extends Screen implements MouseMotionListener{
 
 	public MouseMotionListener getMouseMotionListener(){
 		return this;
+	}
+
+	@Override
+	public MouseListener getMouseListener(){
+		return this;
+	}
+	
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		if(button.isHovered(e.getX(), e.getY())){
+			button.act();
+			}
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

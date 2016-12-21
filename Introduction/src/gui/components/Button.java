@@ -5,6 +5,8 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class Button extends TextLabel implements Clickable{
 
@@ -57,6 +59,6 @@ public class Button extends TextLabel implements Clickable{
 	@Override
 	public void act() {
 		action.act();
-	}	
-	
+	}
+
 }
