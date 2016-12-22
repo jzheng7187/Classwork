@@ -20,9 +20,9 @@ public class Graphic implements Visible {
 	 * @param imageLocation
 	 */
 	public Graphic(int x, int y, String imageLocation) {
-		this.x = x;
-		this.y = y;
-		loadedImages = false;
+		this.setX(x);
+		this.setY(y);
+		setLoadedImages(false);
 		loadImages(imageLocation,0,0);
 	}
 
@@ -35,9 +35,9 @@ public class Graphic implements Visible {
 	 * @param imageLocation
 	 */
 	public Graphic(int x, int y, int w, int h, String imageLocation) {
-		this.x = x;
-		this.y = y;
-		loadedImages = false;
+		this.setX(x);
+		this.setY(y);
+		setLoadedImages(false);
 		loadImages(imageLocation, w, h);
 	}
 	
@@ -49,9 +49,9 @@ public class Graphic implements Visible {
 	 * @param imageLocation
 	 */
 	public Graphic(int x, int y, double scale, String imageLocation) {
-		this.x = x;
-		this.y = y;
-		loadedImages = false;
+		this.setX(x);
+		this.setY(y);
+		setLoadedImages(false);
 		loadImages(imageLocation,scale);
 	}
 	
@@ -98,7 +98,7 @@ public class Graphic implements Visible {
 				 */
 				g.drawImage(icon.getImage(), 0, 0, w, h, 0, 0, icon.getIconWidth(), icon.getIconHeight(), null);
 			}
-			loadedImages = true;
+			setLoadedImages(true);
 		}catch(Exception e){
 			//this happens when you don't name the image correctly
 			e.printStackTrace();
@@ -138,6 +138,22 @@ public class Graphic implements Visible {
 	@Override
 	public void update() {
 		//does nothing. image stays the same
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	public boolean isLoadedImages() {
+		return loadedImages;
+	}
+
+	public void setLoadedImages(boolean loadedImages) {
+		this.loadedImages = loadedImages;
 	}
 
 }

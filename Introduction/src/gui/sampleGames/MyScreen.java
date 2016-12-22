@@ -17,7 +17,7 @@ public class MyScreen extends Screen{
 
 	@Override
 	public void initObjects(ArrayList<Visible> viewObjects) {
-		luminous  = new Graphic(500, 30, 100, 100, "resources/sampleImages/Luminous.png");
+		luminous  = new Graphic(100, 30, 100, 100, "resources/sampleImages/Luminous1.png");
 		viewObjects.add(luminous);
 		
 	}

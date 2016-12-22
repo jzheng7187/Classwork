@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import gui.Screen;
 import gui.components.Action;
 import gui.components.Button;
+import gui.components.ClickableGraphic;
 import gui.components.Graphic;
 import gui.components.TextArea;
 import gui.components.TextLabel;
@@ -20,7 +21,7 @@ public class CoordinateScreen extends Screen implements MouseMotionListener, Mou
 	private Button button;
 	private TextLabel text;
 	private TextArea area;
-	private Graphic luminous;
+	private ClickableGraphic luminous;
 
 	public CoordinateScreen(int width, int height) {
 		super(width, height);
@@ -42,8 +43,14 @@ public class CoordinateScreen extends Screen implements MouseMotionListener, Mou
 				+ " we worked on this in class. This is called Text Area.");
 		viewObjects.add(area);
 		
-//		luminous  = new Graphic(500, 30, 100, 100, "resources/sampleImages/Luminous.png");
-//		viewObjects.add(luminous);
+		luminous  = new ClickableGraphic(50, 30, 100, 100, "resources/sampleImages/Luminous.png", new Action(){
+			
+			@Override
+			public void act(){
+				MouseCoordinateGame.game.setScreen(MouseCoordinateGame.myScreen);
+			}
+		});
+		viewObjects.add(luminous);
 	}
 
 	@Override

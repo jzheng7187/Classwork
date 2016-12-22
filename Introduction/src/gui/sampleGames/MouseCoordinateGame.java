@@ -12,7 +12,7 @@ public class MouseCoordinateGame extends GUIApplication {
 	private Button button;
 	
 	public static void main(String[] args){
-		game = new MouseCoordinateGame(500, 500);
+		game = new MouseCoordinateGame(1000, 1000);
 		Thread app = new Thread(game);
 		app.start();
 	}
