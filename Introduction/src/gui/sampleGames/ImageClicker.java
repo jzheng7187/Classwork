@@ -57,13 +57,14 @@ public class ImageClicker extends Screen implements MouseListener{
 
 	@Override
 	public void initObjects(ArrayList<Visible> viewObjects) {
-		luminous  = new ClickableGraphic(500, 30, "resources/sampleImages/Luminous.png");
+		luminous  = new ClickableGraphic(500, 30, "resources/sampleImages/Luminous1.png");
 		luminous.setAction(new Action() {
 			@Override
 			public void act(){
 				MouseCoordinateGame.game.setScreen(MouseCoordinateGame.myScreen);
 			}
 		});
+		viewObjects.add(luminous);
 	}
 
 	
