@@ -43,8 +43,7 @@ public class CoordinateScreen extends Screen implements MouseMotionListener, Mou
 				+ " we worked on this in class. This is called Text Area.");
 		viewObjects.add(area);
 		
-		luminous  = new ClickableGraphic(50, 30, 100, 100, "resources/sampleImages/Luminous.png", new Action(){
-			
+		luminous  = new ClickableGraphic(500, 30, "resources/sampleImages/Luminous.png", new Action(){
 			@Override
 			public void act(){
 				MouseCoordinateGame.game.setScreen(MouseCoordinateGame.myScreen);

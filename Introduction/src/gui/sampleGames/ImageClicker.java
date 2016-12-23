@@ -3,33 +3,30 @@ package gui.sampleGames;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
-import gui.components.Clickable;
+import gui.Screen;
+import gui.components.Action;
 import gui.components.ClickableGraphic;
+import gui.components.Visible;
 
-public class ImageClicker extends ClickableGraphic implements MouseListener{
+public class ImageClicker extends Screen implements MouseListener{
 	
-	public BufferedImage image;
-
-	public ImageClicker(int x, int y, int w, int h, String imageLocation) {
-		super(x, y, w, h, imageLocation);
-		// TODO Auto-generated constructor stub
+	public ImageClicker(int width, int height) {
+		super(width, height);
 	}
 
-	public ImageClicker(int x, int y, double scale, String imageLocation) {
-		super(x, y, scale, imageLocation);
-		// TODO Auto-generated constructor stub
-	}
+	public ClickableGraphic luminous;
 
-	public ImageClicker(int x, int y, String imageLocation) {
-		super(x, y, imageLocation);
-		// TODO Auto-generated constructor stub
+	public MouseListener getMouseListener(){
+		return this;
 	}
-
+	
+	
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if(((Clickable) image).isHovered(e.getX(), e.getY())){
-			((Clickable) image).act();
+		if(luminous.isHovered(e.getX(), e.getY())){
+			luminous.act();
 			}
 		
 	}
@@ -56,6 +53,17 @@ public class ImageClicker extends ClickableGraphic implements MouseListener{
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void initObjects(ArrayList<Visible> viewObjects) {
+		luminous  = new ClickableGraphic(500, 30, "resources/sampleImages/Luminous.png");
+		luminous.setAction(new Action() {
+			@Override
+			public void act(){
+				MouseCoordinateGame.game.setScreen(MouseCoordinateGame.myScreen);
+			}
+		});
 	}
 
 	

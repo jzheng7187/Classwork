@@ -8,19 +8,18 @@ public class ClickableGraphic extends Graphic implements Clickable {
 		super(x, y, imageLocation);
 	}
 
-	public ClickableGraphic(int x, int y, int w, int h, String imageLocation, Action action2) {
+	public ClickableGraphic(int x, int y, int w, int h, String imageLocation) {
 		super(x, y, w, h, imageLocation);
-		// TODO Auto-generated constructor stub
 	}
 
-	public ClickableGraphic(int x, int y, double scale, String imageLocation) {
-		super(x, y, scale, imageLocation);
-		// TODO Auto-generated constructor stub
+	public ClickableGraphic(int x, int y, String string, Action action) {
+		super(x, y, string);
+		setAction(action);
 	}
 
 	@Override
 	public boolean isHovered(int x, int y) {
-		return x < getX() && x < getX() + getWidth() && y < getY() && y < getY() + getHeight();
+		return x > getX() && x < getX() + getWidth() && y > getY() && y < getY() + getHeight();
 	}
 
 	public void setAction(Action a){
