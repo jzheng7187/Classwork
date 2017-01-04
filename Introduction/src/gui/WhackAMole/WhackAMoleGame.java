@@ -9,6 +9,7 @@ public class WhackAMoleGame extends GUIApplication{
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
 	public void initScreen() {
 		WhackAMoleScreen1 wams = new WhackAMoleScreen1(getWidth(), getHeight());
 		setScreen(wams);
