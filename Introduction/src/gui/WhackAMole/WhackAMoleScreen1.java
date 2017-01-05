@@ -49,7 +49,7 @@ public class WhackAMoleScreen1 extends ClickableScreen implements Runnable {
 
 	
 	public MoleInterface getAMole(){
-		return null;
+		return new Mole((int)(Math.random() * getWidth()), (int)(Math.random() * getHeight()));
 	}
 
 	@Override
