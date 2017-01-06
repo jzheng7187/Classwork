@@ -9,4 +9,6 @@ package gui.Simon;
  */
 public interface MoveInterfaceJonathanZ {
 
+	ButtonInterfaceJonathanZ getButton();
+
 }

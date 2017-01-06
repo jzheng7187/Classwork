@@ -16,7 +16,7 @@ public class SimonScreenJonathanZ extends ClickableScreen implements Runnable {
 	public ArrayList<MoveInterfaceJonathanZ> sequence;
 	public int roundNumber;
 	public boolean acceptingInput;
-	public boolean sequenceIndex;
+	public int sequenceIndex;
 	public int lastSelectedButton;
 	
 
@@ -81,9 +81,13 @@ public class SimonScreenJonathanZ extends ClickableScreen implements Runnable {
 						Thread blink = new Thread(new Runnable(){
 
 							public void run(){
+								b.highlight();
+								if(b == sequence.get(sequenceIndex).getButton()){
+									
+								};
 							}
-								blink = b.highlight();
 							});
+						blink.start();
 					}
 					
 				}
