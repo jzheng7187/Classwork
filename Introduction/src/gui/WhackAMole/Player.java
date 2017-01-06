@@ -19,15 +19,15 @@ public class Player extends Component implements PlayerInterface {
 	public void increaseScore(int i) {
 		score += i;
 		update();
-
+		
 	}
 
 	@Override
 	public void update(Graphics2D g) {
+		g = clear();
 		g.setColor(Color.black);
 		g.drawOval(0, 0, 99, 99);
 		g.drawString("Score = " + score, 40, 55);
-
 	}
 
 }
