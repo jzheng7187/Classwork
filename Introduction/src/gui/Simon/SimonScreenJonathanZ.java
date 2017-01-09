@@ -28,8 +28,15 @@ public class SimonScreenJonathanZ extends ClickableScreen implements Runnable {
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
+		label.setText("");
+	    nextRound();
+	}
 
+	private void nextRound() {
+		acceptingInput = false;
+		roundNumber++;
+		sequence.add(randomMove());
+		
 	}
 
 	@Override
@@ -68,11 +75,14 @@ public class SimonScreenJonathanZ extends ClickableScreen implements Runnable {
 
 	private void addButtons() {
 		int numberOfButtons = 4;
+		Color[] colors = {Color.red, Color.blue, Color.yellow, Color.green,};
 		for(int i = 0; i < numberOfButtons; i++){
 			final ButtonInterfaceJonathanZ b = getAButton();
-			b.setColor(Color.blue);
-			b.setX(250);
-			b.setY(150);
+			for(int j = 0; j < colors.length; j++){				
+				b.setColor(colors[j]);
+			}
+			b.setX(Math.sin(i));
+			b.setY(Math.cos(i));
 			b.setAction(new Action(){
 
 				@Override
@@ -82,9 +92,22 @@ public class SimonScreenJonathanZ extends ClickableScreen implements Runnable {
 
 							public void run(){
 								b.highlight();
+								try {
+									Thread.sleep(800);
+								} catch (InterruptedException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+								b.dim();
 								if(b == sequence.get(sequenceIndex).getButton()){
-									
-								};
+									sequenceIndex++;
+								}else{
+									ProgressInterfaceJonathanZ.gameOver();
+									};
+								if(sequenceIndex == sequence.size()){
+									Thread nextRound = new Thread(SimonScreenJonathanZ.this);
+									nextRound.start();
+								}
 							}
 							});
 						blink.start();

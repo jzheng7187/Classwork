@@ -7,14 +7,16 @@ import gui.components.Clickable;
 
 public interface ButtonInterfaceJonathanZ extends Clickable {
 
-	void setX(int i);
+	void setX(double d);
 
-	void setY(int i);
+	void setY(double d);
 
 	void setColor(Color blue);
 
 	public void setAction(Action action);
 	
 	void highlight();
+
+	void dim();
 
 }
