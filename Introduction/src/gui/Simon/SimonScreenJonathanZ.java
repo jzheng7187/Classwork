@@ -11,7 +11,7 @@ import gui.screens.ClickableScreen;
 public class SimonScreenJonathanZ extends ClickableScreen implements Runnable {
 	
 	public TextLabel label;
-	public ButtonInterfaceJonathanZ button;
+	public ButtonInterfaceJonathanZ[] button;
 	public ProgressInterfaceJonathanZ progress;
 	public ArrayList<MoveInterfaceJonathanZ> sequence;
 	public int roundNumber;
@@ -29,13 +29,35 @@ public class SimonScreenJonathanZ extends ClickableScreen implements Runnable {
 	@Override
 	public void run() {
 		label.setText("");
-	    nextRound();
+		nextRound();
+	}
+
+	private void playSequence() {
+		ButtonInterfaceJonathanZ b = null;
+		for(MoveInterfaceJonathanZ m: sequence){
+			if(b != null){
+				b.dim();
+				b = m.getButton();
+				b.highlight();
+				try {
+					Thread.sleep((long)(2*roundNumber/10));
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				b.dim();
+			}
+		}
 	}
 
 	private void nextRound() {
 		acceptingInput = false;
 		roundNumber++;
 		sequence.add(randomMove());
+		changeText("Simon's Turn");
+		label.setText("");
+		playSequence();
+		changeText("YOur Turn");
 		
 	}
 
@@ -56,8 +78,12 @@ public class SimonScreenJonathanZ extends ClickableScreen implements Runnable {
 
 	
 	private MoveInterfaceJonathanZ randomMove() {
-		ButtonInterfaceJonathanZ b = null;
-		return getMove(b);
+		int select = (int) (Math.random()*button.length);
+		while(select == lastSelectedButton){
+			select = (int) (Math.random()*button.length);
+		}
+		lastSelectedButton = select;
+		return new MoveJonathanZ(button[select]);
 	}
 
 	private MoveInterfaceJonathanZ getMove(ButtonInterfaceJonathanZ b) {
@@ -76,14 +102,15 @@ public class SimonScreenJonathanZ extends ClickableScreen implements Runnable {
 	private void addButtons() {
 		int numberOfButtons = 4;
 		Color[] colors = {Color.red, Color.blue, Color.yellow, Color.green,};
+		button = new ButtonInterfaceJonathanZ[numberOfButtons];
 		for(int i = 0; i < numberOfButtons; i++){
 			final ButtonInterfaceJonathanZ b = getAButton();
 			for(int j = 0; j < colors.length; j++){				
-				b.setColor(colors[j]);
+				button[i].setColor(colors[j]);
 			}
-			b.setX(Math.sin(i));
-			b.setY(Math.cos(i));
-			b.setAction(new Action(){
+			button[i].setX(Math.sin(i));
+			button[i].setY(Math.cos(i));
+			button[i].setAction(new Action(){
 
 				@Override
 				public void act() {
